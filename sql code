@@ -1,0 +1,24 @@
+-- DENSE_RANK(): Rank products by price (highest first)
+SELECT 
+    product_id,
+    product_name,
+    category,
+    price,
+    DENSE_RANK() OVER (ORDER BY price DESC) AS dense_price_rank
+FROM products;
+---If two products have the same price, they will get the same rank, 
+---but the next rank will not be skipped.
+
+
+-- NTILE(4): Divide products into 4 price groups
+SELECT 
+    product_id,
+    product_name,
+    category,
+    price,
+    NTILE(100) OVER (ORDER BY price DESC) AS price_quartile
+FROM products;
+---Here, products are split into 4 groups based on price (like quartiles).
+
+
+
